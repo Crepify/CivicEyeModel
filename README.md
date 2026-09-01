@@ -18,14 +18,15 @@ Both models are interchangeable: same input name `images`, same output layout `[
 
 ---
 
-## 🌐 jsDelivr URLs (after pushing this repo)
+## 🌐 jsDelivr URLs (live — verified)
 
 ```
 https://cdn.jsdelivr.net/gh/Crepify/CivicEyeModel/models/civiceye-int8.onnx
 ```
 
+- ✅ Serving live with CORS enabled (`access-control-allow-origin: *`), byte-identical to the pushed file.
 - Use `@main` or no version while developing; pin a git tag (`@v1.0.0`) for production so the cached URL is stable.
-- jsDelivr only serves files **≤ 20 MB** and does **not** support Git LFS — that's why the quantized file is the one served.
+- jsDelivr only serves files **≤ 20 MB** and does **not** support Git LFS — that's why the quantized file is the one served (`civiceye.onnx` at 25 MB returns 403 from jsDelivr, as expected; host it on Hugging Face if you need the full-precision version served).
 
 ---
 
