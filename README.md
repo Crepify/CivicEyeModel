@@ -2,8 +2,11 @@
 
 ONNX models for **CivicEye** — a YOLO-based civic-issue detector (potholes, garbage, manholes, etc.).
 
-Model graph: `input: images [1, 3, 640, 640] (float32)` → `output: output0 [1, 15, 8400]`
+Model graph: `input: images [1, 3, 640, 640] (float32)` → `output [1, 15, 8400]`
 (8400 anchors, each = `cx, cy, w, h` + **11 class scores**). Exported from PyTorch (fp16), opset 17.
+
+> Note: the fp16 export names its output `output0`; the quantized int8 names it `graph_output_cast_0`.
+> It doesn't matter — `onDeviceYolo.ts` reads `Object.values(results)[0]`, i.e. the first output by value.
 
 ---
 
@@ -12,7 +15,7 @@ Model graph: `input: images [1, 3, 640, 640] (float32)` → `output: output0 [1,
 | File | Size | Format | Where to use it |
 |---|---|---|---|
 | `models/civiceye.onnx` | 25.1 MB | FP16 (original, exact export) | Full precision. Browser-compatible (works in onnxruntime-web). **Too big for jsDelivr** — host on Hugging Face / GitHub release if you need it served. |
-| `models/civiceye-int8.onnx` | 12.5 MB | INT8 static quantization (QDQ) | **jsDelivr-ready** (under the 20 MB limit) and validated end-to-end with `onnxruntime-web` WASM. ~0.7% output drift vs FP16 — visually identical detections. |
+| `models/civiceye-int8.onnx` | 12.5 MB | INT8 static quantization (QDQ) | **jsDelivr-ready** (under the 20 MB limit) and validated end-to-end with `onnxruntime-web` WASM (session + inference both pass). ~0.8% output drift vs FP16 — visually identical detections. |
 
 Both models are interchangeable: same input name `images`, same output layout `[1, 15, 8400]`.
 
