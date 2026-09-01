@@ -24,11 +24,11 @@ Both models are interchangeable: same input name `images`, same output layout `[
 ## 🌐 jsDelivr URLs (live — verified)
 
 ```
-https://cdn.jsdelivr.net/gh/Crepify/CivicEyeModel/models/civiceye-int8.onnx
+https://cdn.jsdelivr.net/gh/Crepify/CivicEyeModel@v1.0.0/models/civiceye-int8.onnx
 ```
 
 - ✅ Serving live with CORS enabled (`access-control-allow-origin: *`), byte-identical to the pushed file.
-- Use `@main` or no version while developing; pin a git tag (`@v1.0.0`) for production so the cached URL is stable.
+- **Use the `@v1.0.0` tagged URL** (a fresh tag = fresh content on jsDelivr, no cache staleness). Update the tag (`v1.1.0`, etc.) whenever you push a new model.
 - jsDelivr only serves files **≤ 20 MB** and does **not** support Git LFS — that's why the quantized file is the one served (`civiceye.onnx` at 25 MB returns 403 from jsDelivr, as expected; host it on Hugging Face if you need the full-precision version served).
 
 ---
@@ -38,7 +38,7 @@ https://cdn.jsdelivr.net/gh/Crepify/CivicEyeModel/models/civiceye-int8.onnx
 Your `src/services/onDeviceYolo.ts` already supports a custom ONNX YOLO via env vars:
 
 ```bash
-VITE_ONDEVICE_YOLO_URL=https://cdn.jsdelivr.net/gh/Crepify/CivicEyeModel/models/civiceye-int8.onnx
+VITE_ONDEVICE_YOLO_URL=https://cdn.jsdelivr.net/gh/Crepify/CivicEyeModel@v1.0.0/models/civiceye-int8.onnx
 VITE_ONDEVICE_YOLO_LABELS=pothole,garbage,manhole,street-light,fallen-tree,sewage,water-leakage,broken-road,sidewalk,illegal-dumping,other
 VITE_ONDEVICE_YOLO_SIZE=640
 VITE_ONDEVICE_YOLO_CONF=0.35
